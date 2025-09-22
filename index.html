@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PickleDink Token Information</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --dark-blue: #003366;
+            --bright-green: #8DC63F;
+            --white: #FFFFFF;
+            --black: #000000;
+            --dark-green: #6da030;
+            --light-blue: #004880;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: var(--dark-blue);
+            color: var(--white);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background: rgba(0, 51, 102, 0.95);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            padding: 15px 0;
+            border-bottom: 1px solid var(--bright-green);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--white);
+        }
+
+        .logo-accent {
+            color: var(--bright-green);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 25px;
+        }
+
+        .nav-links a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+            font-size: 0.95rem;
+        }
+
+        .nav-links a:hover {
+            color: var(--bright-green);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--white);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .info-hero {
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, var(--dark-blue) 0%, var(--light-blue) 100%);
+            padding: 120px 0 60px;
+            text-align: center;
+        }
+
+        .info-hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+        }
+
+        .text-accent {
+            color: var(--bright-green);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 14px 32px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin: 10px;
+            min-width: 200px;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background: var(--bright-green);
+            color: var(--dark-blue);
+            border: 2px solid var(--bright-green);
+        }
+
+        .btn-primary:hover {
+            background: var(--dark-green);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--white);
+            border: 2px solid var(--bright-green);
+        }
+
+        .btn-secondary:hover {
+            background: var(--bright-green);
+            color: var(--dark-blue);
+            transform: translateY(-3px);
+        }
+
+        .btn-group {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 30px 0;
+        }
+
+        .contract-address {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(141, 198, 63, 0.1);
+            padding: 15px 25px;
+            border-radius: 50px;
+            border: 1px solid var(--bright-green);
+            max-width: 600px;
+            margin: 20px auto;
+        }
+
+        .contract-address p {
+            margin: 0;
+            margin-right: 15px;
+            font-family: monospace;
+            font-size: 0.9rem;
+        }
+
+        #copy-ca {
+            background: var(--bright-green);
+            border: none;
+            color: var(--dark-blue);
+            padding: 8px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+   /* Social Links Section */
+        .social-links {
+            
+            text-align: center;
+            padding: 50px 0;
+        }
+
+        .social-links h2 {
+            margin-bottom: 30px;
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .social-icon {
+            width: 55px;
+            height: 55px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 1.4rem;
+            border: 2px solid var(--bright-green);
+            transition: all 0.3s ease;
+        }
+
+        .social-icon:hover {
+            background: var(--bright-green);
+            color: var(--dark-blue);
+            transform: translateY(-5px);
+        }
+
+        .section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            font-size: 2.5rem;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 30px;
+            border-radius: 20px;
+            border: 1px solid rgba(141, 198, 63, 0.2);
+            margin-bottom: 30px;
+        }
+
+        .card h3 {
+            color: var(--bright-green);
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+
+        .tokenomics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .tokenomics-item {
+            background: rgba(141, 198, 63, 0.1);
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        .tokenomics-item h4 {
+            color: var(--bright-green);
+            margin-bottom: 10px;
+        }
+
+        .checklist {
+            list-style: none;
+        }
+
+        .checklist li {
+            margin-bottom: 15px;
+            padding-left: 30px;
+            position: relative;
+        }
+
+        .checklist li:before {
+            content: "•";
+            color: var(--bright-green);
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 30px 0;
+        }
+
+        .comparison-table th, .comparison-table td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .comparison-table th {
+            color: var(--bright-green);
+        }
+
+        .comparison-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        .about-text {
+            flex: 1;
+        }
+
+       .about-image {
+    flex: 0 0 auto;       /* don’t force it to stretch */
+    border-radius: 20px;  /* optional for logos, can remove if you want */
+    overflow: hidden;
+    text-align: center;   /* center the logo inside */
+}
+
+.about-image img {
+    width: 180px;   /* set logo width */
+    height: auto;   /* keeps proportions */
+    display: inline-block;
+}
+
+        /* Footer */
+        footer {
+
+    
+            padding: 50px 0 25px;
+            text-align: center;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-bottom: 35px;
+        }
+
+        .footer-brand {
+            text-align: left;
+        }
+
+        .footer-brand .logo {
+            font-size: 2.2rem;
+            margin-bottom: 15px;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 25px;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: var(--white);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+
+        .footer-links a:hover {
+            color: var(--bright-green);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 25px;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 1024px) {
+            .info-hero h1 {
+                font-size: 2.8rem;
+            }
+            
+            .about-content {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: var(--dark-blue);
+                padding: 20px;
+                border-top: 1px solid var(--bright-green);
+            }
+            
+            .nav-links.active {
+                display: flex;
+            }
+            
+            .nav-links li {
+                margin: 10px 0;
+                margin-left: 0;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .info-hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .btn-group {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 100%;
+                max-width: 300px;
+            }
+            
+            .contract-address {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .contract-address p {
+                margin-right: 0;
+                margin-bottom: 10px;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .footer-brand {
+                text-align: center;
+            }
+
+            .footer-links {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .info-hero h1 {
+                font-size: 1.9rem;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            .footer-links {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">P<span class="logo-accent">DINK</span></div>
+            <ul class="nav-links">
+                <li><a href="https://pickledink.xyz">Home</a></li>
+                <li><a href="https://whitepaper.pickledink.xyz">Whitepaper</a></li>
+                <li><a href="https://roadmap.pickledink.xyz">Roadmap</a></li>
+                <li><a href="https://docs.pickledink.xyz">Docs</a></li>
+                <li><a href="#" class="text-accent">Token Info</a></li>
+            </ul>
+            <button class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="info-hero">
+        <div class="container">
+            <div class="about-image">
+                    <img src="https://i.supaimg.com/90327127-59c7-4e34-97ad-ce24db37f396.png" alt="PickleDink Token">
+                </div>
+            <h1><span class="text-accent">$PDINK</span>: The Currency of the Court</h1>
+            <p>Utility token powering the future of pickleball on the Solana blockchain</p>
+            
+            <div class="btn-group">
+                <a href="https://jup.ag/swap/SOL-PDINK" class="btn btn-primary" target="_blank">Buy on Jupiter</a>
+                <a href="https://raydium.io/swap/?inputMint=sol&outputMint=Fy4HJwQrUqEWKnsfA48Re9RRKZZvGcFEcMRiGD5gNwDM" class="btn btn-primary" target="_blank">Buy on Raydium</a>
+                <a href="https://dexscreener.com/solana/1rhedZCRzeYfwoKsVEVnmM5MjVd18r6AwpAraEe7uJh" class="btn btn-secondary" target="_blank">View Chart</a>
+            </div>
+            
+            <div class="contract-address">
+                <p>CA: <span id="ca-text">Fy4HJwQrUqEWKnsfA48Re9RRKZZvGcFEcMRiGD5gNwDM</span></p>
+                <button id="copy-ca"><i class="fas fa-copy"></i></button>
+            </div>
+            
+    <!-- Social Links Section -->
+    <section class="social-links">
+        <div class="container">
+            <h2 class="section-title">Join the <span class="text-accent">Community</span></h2>
+            <div class="social-icons">
+               
+                 <a href="https://x.com/pickledinkcoin" class="social-icon" target="_blank">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 1200 1227" fill="currentColor">
+        <path d="M714.163 519.284L1160.89 0H1057.86L671.591 
+        450.887L357.501 0H0L468.563 681.821L0 
+        1226.68H103.031L510.363 747.675L842.499 
+        1226.68H1200L714.137 519.284H714.163ZM563.748 
+        687.828L516.169 619.379L140.624 79.6944H306.615L602.505 
+        497.046L650.084 565.495L1057.91 1150.31H891.921L563.748 
+        687.828Z"/>
+    </svg>
+</a>
+                </a>
+               <a href="https://t.me/PickleDink" class="social-icon" target="_blank">
+  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 240 240" fill="currentColor">
+    <path d="M120 0C53.73 0 0 53.73 0 120s53.73 120 120 120 
+    120-53.73 120-120S186.27 0 120 0Zm58.52 82.44c-1.42 
+    15-7.58 64.48-10.72 85.54-1.32 8.82-5.2 11.76-8.54 
+    12.08-7.26.67-12.78-4.8-19.82-9.41-11-7.22-17.23-11.73-28-18.74-12.38-8.16-4.36-12.64 
+    2.71-19.93 1.86-1.9 34.13-31.3 34.75-33.95.08-.36.16-1.7-.64-2.4s-2-.46-2.87-.27c-1.22.27-20.73 
+    13.17-58.51 38.68-5.54 3.8-10.53 5.66-15.05 5.55-4.95-.12-14.47-2.79-21.56-5.1-8.67-2.83-15.57-4.33-15-9.12.31-2.58 
+    3.86-5.22 10.61-7.95 41.57-18.13 69.26-30.09 83.07-35.86 39.6-16.47 47.87-19.34 53.26-19.43 1.18-.02 
+    3.82.27 5.54 1.67 1.45 1.16 1.89 2.73 2.09 3.84.2 1.11.46 3.64.29 5.63Z"/>
+  </svg>
+</a>
+
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">About <span class="text-accent">PickleDink</span></h2>
+            
+            <div class="about-content">
+                <div class="about-text">
+                    <p>PickleDink (PDINK) is the utility token that powers the PicklePayouts ecosystem, a platform for pickleball players to compete, wager, and earn rewards on the Solana blockchain.</p>
+                    <p>PDINK is used for tournament entry fees, match wagering, earning rewards, marketplace purchases, and eventually community governance on the PicklePayouts platform.</p>
+                    <br/><br/>
+                    <ul class="checklist">
+                        <li>First dedicated cryptocurrency for pickleball enthusiasts</li>
+                        <li>Built on Solana for fast transactions and low fees</li>
+                        <li>Multiple utilities within the gaming ecosystem</li>
+                        <li>Community-driven development and governance</li>
+                    </ul>
+                </div>
+                  <div class="btn-group">
+                <a href="https://roadmap.pickledink.xyz" class="btn btn-primary" target="_blank">Check Full roadmap</a> 
+        </div>
+    </section>
+          
+    <!-- Value Proposition Section -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">The <span class="text-accent">$PDINK</span> Advantage</h2>
+            
+            <div class="card">
+                <h3>Solving Real Problems in GameFi</h3>
+                <p>$PDINK addresses critical gaps in the GameFi space by targeting the massively underserved pickleball market—one of America's fastest-growing sports with over 36 million passionate players.</p>
+                <br/><br/>
+                <p>While most GameFi projects chase the same saturated markets, $PDINK delivers:</p>
+                <br/>
+                <ol class="checklist">
+                    <li>Real-world utility connecting digital assets to physical sports</li>
+                    <li>A proven, growing community of enthusiastic players</li>
+                    <li>Multiple revenue streams beyond speculation</li>
+                    <li>Tangible benefits for both players and token holders</li>
+                </ol>
+            </div>
+        </div>
+    </section>
+
+    <!-- Differentiation Section -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">Why <span class="text-accent">$PDINK</span> Stands Apart</h2>
+            
+            <table class="comparison-table">
+                <tr>
+                    <th>Feature</th>
+                    <th>Typical Solana Coin</th>
+                    <th>$PDINK</th>
+                </tr>
+                <tr>
+                    <td>Target Audience</td>
+                    <td>Generic crypto traders</td>
+                    <td>36M+ pickleball players + crypto enthusiasts</td>
+                </tr>
+                <tr>
+                    <td>Utility</td>
+                    <td>Mostly speculation</td>
+                    <td>Tournaments, NFTs, staking, real-world integration</td>
+                </tr>
+                <tr>
+                    <td>Market Position</td>
+                    <td>Highly competitive</td>
+                    <td>First-mover in pickleball niche</td>
+                </tr>
+                <tr>
+                    <td>Revenue Model</td>
+                    <td>Mostly speculative</td>
+                    <td>Platform fees, NFT sales, marketplace transactions</td>
+                </tr>
+                <tr>
+                    <td>Community</td>
+                    <td>Financial-focused</td>
+                    <td>Passion-based (sports community)</td>
+                </tr>
+            </table>
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">Early Holder <span class="text-accent">Advantages</span></h2>
+            
+            <div class="tokenomics-grid">
+                <div class="tokenomics-item">
+                    <h4>NFT Benefits</h4>
+                    <ul class="checklist">
+                        <li>Exclusive airdrops (Bronze to Diamond tiers)</li>
+                        <li>Special platform abilities & cosmetics</li>
+                        <li>Revenue share from secondary market</li>
+                        <li>Physical merchandise redemption</li>
+                    </ul>
+                </div>
+                
+                <div class="tokenomics-item">
+                    <h4>Staking Rewards</h4>
+                    <ul class="checklist">
+                        <li>Tiered APY rewarding long-term holders</li>
+                        <li>NFT-boosted staking yields</li>
+                        <li>Early tournament access</li>
+                        <li>Governance voting rights</li>
+                    </ul>
+                </div>
+                
+                <div class="tokenomics-item">
+                    <h4>Utility Advantages</h4>
+                    <ul class="checklist">
+                        <li>Reduced platform fees</li>
+                        <li>Whitelist priority for all drops</li>
+                        <li>Exclusive tournament access</li>
+                        <li>Early PaddleTrac feature access</li>
+                    </ul>
+                </div>
+                
+                <div class="tokenomics-item">
+                    <h4>Growth Participation</h4>
+                    <ul class="checklist">
+                        <li>Value appreciation from adoption</li>
+                        <li>Revenue sharing from platform fees</li>
+                        <li>Partnership benefits</li>
+                        <li>Cross-promotional opportunities</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tokenomics Section -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">Tokenomics & <span class="text-accent">Distribution</span></h2>
+            
+            <div class="card">
+                <h3>Transparent Token Structure</h3>
+                
+                <div class="tokenomics-grid">
+                    <div class="tokenomics-item">
+                        <h4>Total Supply</h4>
+                        <p>100,000,000 PDINK</p>
+                    </div>
+                    
+                    <div class="tokenomics-item">
+                        <h4>Circulating Supply</h4>
+                        <p>100,000,000 (100%)</p>
+                    </div>
+                    
+                    <div class="tokenomics-item">
+                        <h4>Tax</h4>
+                        <p>0% Buy/Sell</p>
+                    </div>
+                    
+                    <div class="tokenomics-item">
+                        <h4>Blockchain</h4>
+                        <p>Solana (SPL)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Value Proposition Section -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">The <span class="text-accent">$PDINK</span> Value Proposition</h2>
+            
+            <div class="card">
+                <h3>Why $PDINK Represents a Unique Opportunity</h3>
+                
+                <ul class="checklist">
+                    <li>First-mover in a proven, growing market (36M+ players)</li>
+                    <li>Multiple utility layers creating constant demand</li>
+                    <li>Real-world connection between digital and physical sports</li>
+                    <li>Transparent tokenomics with 0% tax</li>
+                    <li>Clear roadmap with achievable milestones</li>
+                    <li>Strong community focus with passionate user base</li>
+                    <li>Multiple revenue streams beyond token speculation</li>
+                    <li>Early-mover advantages with compounding benefits</li>
+                </ul>
+                
+                <div class="btn-group" style="margin-top: 30px;">
+                    <a href="https://jup.ag/swap/SOL-PDINK" class="btn btn-primary" target="_blank">Buy on Jupiter</a>
+                    <a href="https://raydium.io/swap/" class="btn btn-primary" target="_blank">Buy on Raydium</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <div class="logo">P<span class="logo-accent">DINK</span></div>
+                    <p>The Currency of the Court</p>
+                </div>
+                <div class="footer-links">
+                    <a href="https://pickledink.xyz">Home</a>
+                    <a href="https://whitepaper.pickledink.xyz">Whitepaper</a>
+                    <a href="https://roadmap.pickledink.xyz">Roadmap</a>
+                    <a href="https://docs.pickledink.xyz">Docs</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 PickleDink (PDINK). All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Copy Contract Address
+        document.getElementById('copy-ca').addEventListener('click', function() {
+            const caText = document.getElementById('ca-text').textContent;
+            navigator.clipboard.writeText(caText).then(() => {
+                const originalHtml = this.innerHTML;
+                this.innerHTML = '<i class="fas fa-check"></i>';
+                setTimeout(() => {
+                    this.innerHTML = originalHtml;
+                }, 2000);
+            });
+        });
+
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const navLinks = document.querySelector('.nav-links');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Header Scroll Effect
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(0, 33, 66, 0.98)';
+                header.style.boxShadow = '0 5px 20px rgba(0, 0, 0, 0.2)';
+            } else {
+                header.style.background = 'rgba(0, 51, 102, 0.95)';
+                header.style.boxShadow = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
